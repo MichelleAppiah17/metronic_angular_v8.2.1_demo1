@@ -1,0 +1,24 @@
+<form class="form shadow-sm p-10 m-3 bg-white position-fixed top-0 start-50 translate-middle-x z-index-9999"
+    [formGroup]="todoForm" *ngIf="showForm" (ngSubmit)="onSubmit()">
+
+    <div class="card-body">
+        <div class="form-group p-10">
+            <label>Task:</label>
+            <input type="text" class="form-control form-control-solid" placeholder="Enter task" formControlName="task"
+                [class.is-invalid]="todoForm.get('task')?.invalid && (todoForm.get('task')?.dirty || todoForm.get('task')?.touched || isSubmitted)" />
+            <div *ngIf="todoForm.get('task')?.invalid && (todoForm.get('task')?.dirty || todoForm.get('task')?.touched || isSubmitted)"
+                class="invalid-feedback">This field is required*</div>
+            <hr>
+        </div>
+        <div class="form-group p-10">
+            <label>Due Date:</label>
+            <input type="date" class="form-control form-control-solid" placeholder="Enter due date"
+                formControlName="dueDate" />
+            <hr>
+        </div>
+    </div>
+    <div class="card-footer p-10">
+        <button type="submit" class="btn btn-primary mr-2" [disabled]="todoForm.invalid">Save</button>
+        <button type="reset" class="btn btn-secondary" (click)="toggleForm(false)">Cancel</button>
+    </div>
+</form>
